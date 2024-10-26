@@ -6,74 +6,49 @@
         {
             Console.WriteLine("Hello, World!");
 
-            City city = new City();
-            city.Input();
+            City city1 = new City();
+            city1.Input();
             Console.WriteLine("---------");
-            city.Display();
+
+            City city2 = new City();
+            city2.Input();
+            Console.WriteLine("---------");
+
+            if(city1 == city2)
+            {
+                Console.WriteLine("Good");
+            }
+            else
+            {
+                Console.WriteLine("Not good");
+            }
 
             Console.WriteLine("");
             Console.WriteLine("////////////");
             Console.WriteLine("");
 
-            Employee employee = new Employee();
-            employee.In();
-            employee.Out();
+            Employee employee1 = new Employee();
+            employee1.In();
+            employee1.Out();
+
+            employee1 += 500;
+            employee1.Out();
 
             Console.WriteLine("");
             Console.WriteLine("////////////");
             Console.WriteLine("");
 
-            Plane airplane = new Plane("Boeing 747", "Boeing", 2000, "Пассажирский");
-            airplane.SetType(" Bussss ");
-            airplane.DisplayData();
-        }
 
-        class Plane
-        {
-            string name;
-            string manuf;
-            int year;
-            string type;
             
-
-            public Plane()
-            {
-                name = "";
-                manuf = "";
-                year = 0;
-                type = "";
-            }
-
-            public Plane(string name, string manuf, int year, string type)
-            {
-                this.name = name;
-                this.manuf = manuf;
-                this.type = type;
-                this.year = year;
-            }
-
-            public void SetType(string type)
-            {
-                this.type = type;
-            }
-
-            public string GetType()
-            {
-                return type;
-            }
-            public void DisplayData()
-            {
-                Console.WriteLine("Название самолёта: " + name);
-                Console.WriteLine("Производитель: " + manuf);
-                Console.WriteLine("Год выпуска: " + year);
-                Console.WriteLine("Тип самолёта: " + type);
-            }
         }
+
+        
         class Employee
         {
             string name;
             int data;
             int col;
+            int money;
             string email;
             string job;
             private string description;
@@ -85,6 +60,8 @@
                 Console.WriteLine("Число ");
                 data = int.Parse(Console.ReadLine());
 
+                Console.WriteLine("Заработок ");
+                money = int.Parse(Console.ReadLine());
                 Console.WriteLine("Телефон ");
                 col = int.Parse(Console.ReadLine());
                 Console.WriteLine("Email ");
@@ -96,11 +73,39 @@
                 description = Console.ReadLine();
             }
 
+            public static Employee operator +(Employee a, int b)
+            {
+                a.money += b;
+                return a;
+            }
+            public static Employee operator -(Employee a, int b)
+            {
+                a.money -= b;
+                return a;
+            }
+            public static bool operator ==(Employee a, Employee b)
+            {
+                return a.money == b.money;
+            }
+            public static bool operator !=(Employee a, Employee b)
+            {
+                return a.money != b.money;
+            }
+            public static bool operator <(Employee a, Employee b)
+            {
+                return a.money < b.money;
+            }
+            public static bool operator >(Employee a, Employee b)
+            {
+                return a.money > b.money;
+            }
+            
             public void Out()
             {
                 Console.WriteLine($"$ {name}" +
                     $"\t, {data} " +
                     $"\t, {col} " +
+                    $"\t, {money} " +
                     $"\t, {email}" +
                     $"\t, {job}" +
                     $"\t, {description}");
@@ -142,7 +147,32 @@
                 Console.WriteLine($"Количество жителей: {population}");
                 Console.WriteLine($"Телефонный код: {phone}");
             }
-
+            public static City operator +(City a, int b)
+            {
+                a.population += b;
+                return a;
+            }
+            public static City operator -(City a, int b)
+            {
+                a.population -= b;
+                return a;
+            }
+            public static bool operator ==(City a, City b)
+            {
+                return a.population == b.population;
+            }
+            public static bool operator !=(City a, City b)
+            {
+                return a.population != b.population ;
+            }
+            public static bool operator <(City a, City b)
+            {
+                return a.population < b.population;
+            }
+            public static bool operator >(City a, City b)
+            {
+                return a.population > b.population;
+            }
             public string GetCity()
             {
                 return name;
